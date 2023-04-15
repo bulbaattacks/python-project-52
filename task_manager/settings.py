@@ -45,7 +45,7 @@ INSTALLED_APPS = [
     'bootstrap4',
     'task_manager',
     'labels',
-    'states',
+    'statuses',
     'tasks',
     'users',
 
@@ -109,8 +109,12 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-# The model to use to represent a User.
+# The model to use to represent a User
 AUTH_USER_MODEL = 'users.User'
+
+# Returns the URL to redirect to after login and logout
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
 
 
 # Internationalization
