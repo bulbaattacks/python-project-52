@@ -31,6 +31,7 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/users/">{% translate "Users" %}</a>
                     </li>
+                    {% if user.is_authenticated %}
                     <li class="nav-item">
                       <a class="nav-link" href="/statuses/">{% translate "States" %}</a>
                     </li>
@@ -40,9 +41,9 @@
                     <li class="nav-item">
                       <a class="nav-link" href="/tasks/">{% translate "Tasks" %}</a>
                     </li>
+                    {% endif %}
                 </ul>
-
-                <ul class="navbar-nav mr-auto">
+                <ul class="navbar-nav">
                     {% if not user.is_authenticated %}
                     <li class="nav-item">
                         <a class="nav-link" href="/login/">{% translate "Log in" %}</a>
