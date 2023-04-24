@@ -145,3 +145,5 @@ LOCALE_PATHS = [
 
 # Django uses this language as the default translation
 LANGUAGE_CODE = 'ru'
+
+CSRF_TRUSTED_ORIGINS = ['https://python-project-52-production-409d.up.railway.app']
