@@ -19,8 +19,6 @@ makemigrations:
 migrate:
 	poetry run python manage.py migrate
 
-#test:
-	#poetry run pytest
 
-#test-cov:
-	#poetry run pytest --cov=page_analyzer tests/ --cov-report xml
+test:
+	poetry run python manage.py test
