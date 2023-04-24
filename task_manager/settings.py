@@ -140,7 +140,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # A list of directories where Django looks for translation files
 LOCALE_PATHS = [
-    os.path.join(BASE_DIR, "task_manager", "locale")
+    os.path.join(BASE_DIR, "task_manager", "../locale")
 ]
 
 # Django uses this language as the default translation

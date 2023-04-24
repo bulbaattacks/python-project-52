@@ -60,14 +60,7 @@
             </div>
         </nav>
     <div class="container wrapper flex-grow-1">
-        {% if messages %}
-            {% for message in messages %}
-                <div class="alert alert-info alert-dismissible fade show" role="alert">
-                    <button type="button" class="close" data-dismiss="alert" aria-label="close">×</button>
-                    {{ message }}
-                </div>
-            {% endfor %}
-        {% endif %}
+        {% bootstrap_messages %}
         {% block content %} layout content {% endblock%}
     <footer>
       <div class="container my-5 pt-4 border-top">
