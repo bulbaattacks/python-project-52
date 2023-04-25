@@ -5,10 +5,10 @@
 
 {% block content %}
 
-<h1 class="my-4">Delete the User</h1>
+<h1 class="my-4">{% translate "Delete the User" %}</h1>
 <form method="post" class="form">
   {% csrf_token %}
   {% bootstrap_form form %}
-  {% buttons %}<button type="submit" class="btn btn-primary">Yes, delete</button>{% endbuttons %}
+  {% buttons %}<button type="submit" class="btn btn-primary">{% translate "Yes, delete" %}</button>{% endbuttons %}
 </form>
 {% endblock%}

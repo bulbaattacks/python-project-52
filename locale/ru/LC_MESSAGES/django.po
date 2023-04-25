@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-24 14:59+0400\n"
+"POT-Creation-Date: 2023-04-25 17:51+0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -25,6 +25,7 @@ msgid "Task manager"
 msgstr "Менеджер задач"
 
 #: task_manager/templates/base.html:32
+#: users/templates/users/list_of_users.html:6
 msgid "Users"
 msgstr "Пользователи"
 
@@ -44,7 +45,7 @@ msgstr "Задачи"
 msgid "Log in"
 msgstr "Вход"
 
-#: task_manager/templates/base.html:52
+#: task_manager/templates/base.html:52 users/templates/users/edit.html:8
 msgid "Registration"
 msgstr "Регистрация"
 
@@ -74,6 +75,32 @@ msgstr "Вы залогинены"
 msgid "You are logged out"
 msgstr "Вы разлогинены"
 
+#: users/templates/users/delete.html:8
+msgid "Delete the User"
+msgstr "Удаление пользователя"
+
+#: users/templates/users/delete.html:12
+msgid "Yes, delete"
+msgstr "Да, удалить"
+
+#: users/templates/users/edit.html:12
+#, fuzzy
+#| msgid "Registration"
+msgid "Registrate"
+msgstr "Регистрация"
+
+#: users/templates/users/list_of_users.html:11
+msgid "User name"
+msgstr "Имя пользователя"
+
+#: users/templates/users/list_of_users.html:12
+msgid "Full name"
+msgstr "Полное имя"
+
+#: users/templates/users/list_of_users.html:13
+msgid "Date of creation"
+msgstr "Дата создания"
+
 #: users/templates/users/list_of_users.html:25
 msgid "Update"
 msgstr "Изменить"
@@ -82,22 +109,22 @@ msgstr "Изменить"
 msgid "Delete"
 msgstr "Удалить"
 
-#: users/views.py:23
+#: users/views.py:30
 msgid "User was created successfully"
 msgstr "Пользователь успешно зарегистрирован"
 
-#: users/views.py:31
+#: users/views.py:38
 msgid "User was updated successfully"
 msgstr "Пользователь успешно изменён"
 
-#: users/views.py:40 users/views.py:60
+#: users/views.py:47 users/views.py:67
 msgid "You have no right to edit the user."
 msgstr "У вас нет прав для изменения другого пользователя."
 
-#: users/views.py:43 users/views.py:63
+#: users/views.py:50 users/views.py:70
 msgid "You are not authored! Please, log in."
 msgstr "Вы не авторизованы! Пожалуйста, выполните вход."
 
-#: users/views.py:51
+#: users/views.py:58
 msgid "User was deleted successfully"
 msgstr "Пользователь успешно удалён"
