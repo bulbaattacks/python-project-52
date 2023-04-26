@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+
+{% block content %}
+<h1 class="my-4">{% translate "Tasks" %}</h1>
+<a href="{% url 'task_create' %}">{% translate "Create task" %}</a>
+<table class="table table-stripped">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>{% translate "Name" %}</th>
+            <th>{% translate "Status" %}</th>
+            <th>{% translate "Author" %}</th>
+            <th>{% translate "Assigned to" %}</th>
+            <th>{% translate "Date of creation" %}</th>
+            <th></th>
+        </tr>
+    </thead>
+    {% for task in object_list %}
+    <tbody>
+        <tr>
+            <td>{{ task.id }}</td>
+            <td>{{ task.name }}</td>
+            <td>Status</td>
+            <td>Author</td>
+            <td>Assigned to</td>
+            <td>{{ task.created_at }}</td>
+            <td>
+                <a href="/tasks/{{ task.id }}/update/">{% translate "Update" %}</a>
+                <br>
+                <a href="/tasks/{{ task.id }}/delete/">{% translate "Delete" %}</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

@@ -14,7 +14,6 @@ class StatusesListView(LoginRequiredMixin, ListView):
     model = Status
     template_name = "statuses/list_of_statuses.html"
     success_url = reverse_lazy('statuses_list')
-    login_url = reverse_lazy('login')
 
 
 class StatusCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
