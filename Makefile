@@ -22,3 +22,11 @@ migrate:
 
 test:
 	poetry run python manage.py test
+
+
+makemess:
+	django-admin makemessages -l ru
+
+
+compilemess:
+	django-admin compilemessages

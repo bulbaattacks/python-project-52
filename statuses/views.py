@@ -19,5 +19,20 @@ class StatusCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     form_class = StatusForm
     model = Status
     template_name = "statuses/edit.html"
-    success_url = reverse_lazy("login")
+    success_url = reverse_lazy('statuses_list')
     success_message = _("Status was created successfully")
+
+
+class StatusUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
+    model = Status
+    form_class = StatusForm
+    template_name = 'statuses/edit.html'
+    success_url = reverse_lazy('statuses_list')
+    success_message = _("Status was updated successfully")
+
+
+class StatusDeleteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
+    model = Status
+    template_name = 'statuses/delete.html'
+    success_url = reverse_lazy('statuses_list')
+    success_message = _("Status was deleted successfully")
