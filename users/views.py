@@ -13,8 +13,7 @@ from django.utils import timezone
 
 class UsersListView(ListView):
     model = User
-    # context_object_name = "users"
-    template_name = 'users/list_of_users.html'
+    template_name = "users/list_of_users.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -25,8 +24,8 @@ class UsersListView(ListView):
 class UserCreateView(SuccessMessageMixin, CreateView):
     form_class = UserForm
     model = User
-    template_name = 'users/edit.html'
-    success_url = reverse_lazy('login')
+    template_name = "users/edit.html"
+    success_url = reverse_lazy("login")
     success_message = _("User was created successfully")
 
 

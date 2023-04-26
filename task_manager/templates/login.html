@@ -4,10 +4,10 @@
 
 {% block content %}
 
-<h1 class="my-4">Entrance</h1>
+<h1 class="my-4">{% translate "Entrance" %}</h1>
 <form method="post" class="form">
   {% csrf_token %}
   {% bootstrap_form form %}
-  {% buttons %}<button type="submit" class="btn btn-primary">Enter</button>{% endbuttons %}
+  {% buttons %}<button type="submit" class="btn btn-primary">{% translate "Enter" %}</button>{% endbuttons %}
 </form>
 {% endblock%}
