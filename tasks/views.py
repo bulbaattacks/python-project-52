@@ -6,15 +6,13 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from tasks.models import Task
 from tasks.forms import TaskForm
 from django.contrib import messages
-from django.shortcuts import redirect
 from django.utils.translation import gettext_lazy as _
-from django.utils import timezone
 
 
 class TasksListView(LoginRequiredMixin, ListView):
     model = Task
     template_name = "tasks/list_of_tasks.html"
-    success_url = reverse_lazy('tasks_list')
+    # success_url = reverse_lazy('tasks_list')
 
 
 class TaskCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):

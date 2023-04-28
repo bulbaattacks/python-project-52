@@ -17,14 +17,14 @@
             <th></th>
         </tr>
     </thead>
-    {% for task in object_list %}
+        {% for task in object_list %}
     <tbody>
         <tr>
             <td>{{ task.id }}</td>
             <td>{{ task.name }}</td>
-            <td>Status</td>
-            <td>Author</td>
-            <td>Assigned to</td>
+            <td>{{ task.status }}</td>
+            <td>{{ task.creator }}</td>
+            <td>{{ task.assignee }}</td>
             <td>{{ task.created_at }}</td>
             <td>
                 <a href="/tasks/{{ task.id }}/update/">{% translate "Update" %}</a>
