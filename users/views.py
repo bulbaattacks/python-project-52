@@ -9,6 +9,8 @@ from django.contrib import messages
 from django.shortcuts import redirect
 from django.utils.translation import gettext_lazy as _
 from django.utils import timezone
+from tasks.models import Task
+from django.http import HttpResponseRedirect
 
 
 class UsersListView(ListView):
@@ -68,3 +70,11 @@ class UserDeleteView(LoginRequiredMixin, UserPassesTestMixin, SuccessMessageMixi
         else:
             messages.error(self.request, _("You are not authored! Please, log in."))
             return redirect(reverse_lazy('login'))
+
+    def post(self, request, *args, **kwargs):
+        if Task.objects.filter(id__gt=0):
+            messages.add_message(request, messages.ERROR,
+                                 _("Can't delete the user because it's used for the task"))
+            return HttpResponseRedirect(reverse_lazy('statuses_list'))
+        return self.delete(request, *args, **kwargs)
+
