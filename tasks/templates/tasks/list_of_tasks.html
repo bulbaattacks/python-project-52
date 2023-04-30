@@ -24,7 +24,12 @@
             <td>{{ task.name }}</td>
             <td>{{ task.status }}</td>
             <td>{{ task.creator }}</td>
+            {% if task.assignee == None %}
+            <td> </td>
+            {% endif %}
+            {% if task.assignee != None %}
             <td>{{ task.assignee }}</td>
+            {% endif %}
             <td>{{ task.created_at }}</td>
             <td>
                 <a href="/tasks/{{ task.id }}/update/">{% translate "Update" %}</a>

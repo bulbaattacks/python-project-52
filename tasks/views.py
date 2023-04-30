@@ -7,6 +7,7 @@ from tasks.models import Task
 from tasks.forms import TaskForm
 from django.contrib import messages
 from django.utils.translation import gettext_lazy as _
+from django.shortcuts import render, redirect
 
 
 class TasksListView(LoginRequiredMixin, ListView):
@@ -21,6 +22,12 @@ class TaskCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     template_name = "tasks/edit.html"
     success_url = reverse_lazy('tasks_list')
     success_message = _("Task was created successfully")
+
+    def form_valid(self, form):
+        """If the form is valid, add creator of the task and save the associated model."""
+        form.instance.creator = self.request.user
+        self.object = form.save()
+        return super().form_valid(form)
 
 
 class TaskUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):

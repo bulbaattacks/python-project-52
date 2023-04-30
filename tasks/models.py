@@ -10,7 +10,7 @@ class Task(models.Model):
     created_at = models.DateTimeField(auto_now=True)
     status = models.ForeignKey(Status, on_delete=models.PROTECT)
     creator = models.ForeignKey(User, related_name='creator', on_delete=models.PROTECT)
-    assignee = models.ForeignKey(User, related_name='assignee', on_delete=models.PROTECT, blank=True)
+    assignee = models.ForeignKey(User, related_name='assignee', on_delete=models.PROTECT, null=True, blank=True)
     label = models.ManyToManyField(Label, blank=True)
 
     def __str__(self):
