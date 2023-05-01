@@ -26,6 +26,11 @@ class StatusCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     success_url = reverse_lazy('statuses_list')
     success_message = _("Status was created successfully")
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["title"] = _("Create status")
+        return context
+
 
 class StatusUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     model = Status
@@ -33,6 +38,11 @@ class StatusUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     template_name = 'statuses/edit.html'
     success_url = reverse_lazy('statuses_list')
     success_message = _("Status was updated successfully")
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["title"] = _("Edit the status")
+        return context
 
 
 class StatusDeleteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
@@ -46,5 +56,10 @@ class StatusDeleteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
             messages.add_message(request, messages.ERROR, _("Can't delete the status because it's used for the task"))
             return HttpResponseRedirect(reverse_lazy('statuses_list'))
         return self.delete(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["title"] = _("Delete the status")
+        return context
 
 

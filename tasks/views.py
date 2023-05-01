@@ -13,7 +13,6 @@ from django.shortcuts import render, redirect
 class TasksListView(LoginRequiredMixin, ListView):
     model = Task
     template_name = "tasks/list_of_tasks.html"
-    # success_url = reverse_lazy('tasks_list')
 
 
 class TaskCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
@@ -29,6 +28,11 @@ class TaskCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
         self.object = form.save()
         return super().form_valid(form)
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["title"] = _("Create task")
+        return context
+
 
 class TaskUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     model = Task
@@ -37,9 +41,19 @@ class TaskUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     success_url = reverse_lazy('tasks_list')
     success_message = _("Task was updated successfully")
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["title"] = _("Edit the task")
+        return context
+
 
 class TaskDeleteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
     model = Task
     template_name = "tasks/delete.html"
     success_url = reverse_lazy('tasks_list')
     success_message = _("Task was deleted successfully")
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["title"] = _("Delete the task")
+        return context
