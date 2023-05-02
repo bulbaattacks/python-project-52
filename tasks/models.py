@@ -5,7 +5,7 @@ from labels.models import Label
 
 
 class Task(models.Model):
-    name = models.CharField(max_length=150)
+    name = models.CharField(max_length=150, unique=True)
     description = models.TextField(null=True, blank=True)
     created_at = models.DateTimeField(auto_now=True)
     status = models.ForeignKey(Status, on_delete=models.PROTECT)

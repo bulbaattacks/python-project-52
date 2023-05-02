@@ -8,8 +8,6 @@ from django.urls import reverse_lazy
 from statuses.forms import StatusForm
 from tasks.models import Task
 from django.contrib import messages
-from django.shortcuts import redirect, get_object_or_404
-from django.db.models import ProtectedError
 from django.http import HttpResponseRedirect
 
 
@@ -49,17 +47,16 @@ class StatusDeleteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
     model = Status
     template_name = 'statuses/delete.html'
     success_url = reverse_lazy('statuses_list')
-    success_message = _("Status was deleted successfully")
 
     def post(self, request, *args, **kwargs):
-        if Task.objects.filter(id__gt=0):
+        status_id = kwargs.get('pk')
+        if Task.objects.filter(status=status_id):
             messages.add_message(request, messages.ERROR, _("Can't delete the status because it's used for the task"))
             return HttpResponseRedirect(reverse_lazy('statuses_list'))
+        messages.add_message(request, messages.SUCCESS, _("Status was deleted successfully"))
         return self.delete(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["title"] = _("Delete the status")
         return context
-
-
