@@ -1,10 +1,24 @@
 {% extends "base.html" %}
+{% load bootstrap4 %}
 {% load i18n %}
+{% get_current_language as LANGUAGE_CODE %}
+{% bootstrap_javascript jquery='full' %}
+{% bootstrap_css %}
 
 
 {% block content %}
 <h1 class="my-4">{% translate "Tasks" %}</h1>
+
+<div class="card-body bg-light">
+    <form class="form-inline center" method="get">
+        {% bootstrap_form filter.form size='small' %}
+  {% buttons %}<button type="submit" class="btn btn-primary">{% translate "Create" %}</button>{% endbuttons %}
+</form>
+</div>
+
+
 <a href="{% url 'task_create' %}">{% translate "Create task" %}</a>
+
 <table class="table table-stripped">
     <thead>
         <tr>

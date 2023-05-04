@@ -6,11 +6,16 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from tasks.models import Task
 from tasks.forms import TaskForm
 from django.utils.translation import gettext_lazy as _
+from django_filters.views import FilterView
+from .filters import TaskFilter
 
 
-class TasksListView(LoginRequiredMixin, ListView):
+class TasksListView(LoginRequiredMixin, FilterView):
     model = Task
     template_name = "tasks/list_of_tasks.html"
+    context_object_name = 'tasks'
+    filterset_class = TaskFilter
+    login_url = 'login'
 
 
 class TaskCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
