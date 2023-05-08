@@ -30,3 +30,6 @@ makemess:
 
 compilemess:
 	django-admin compilemessages
+
+shell:
+	poetry run django-admin shell
