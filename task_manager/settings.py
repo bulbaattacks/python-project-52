@@ -60,6 +60,9 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    # Rollbar middleware
+    'rollbar.contrib.django.middleware.RollbarNotifierMiddleware',
 ]
 
 ROOT_URLCONF = 'task_manager.urls'
@@ -149,3 +152,11 @@ LANGUAGE_CODE = 'ru'
 
 # For deploying the Django app on the railway
 CSRF_TRUSTED_ORIGINS = ['https://python-project-52-production-409d.up.railway.app']
+
+
+ROLLBAR = {
+    'access_token': 'POST_SERVER_ITEM_ACCESS_TOKEN',
+    'environment': 'development' if DEBUG else 'production',
+    'branch': 'master',
+    'root': os.getcwd(),
+}
