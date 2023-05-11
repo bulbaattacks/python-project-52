@@ -34,6 +34,7 @@ class TaskCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["title"] = _("Create task")
+        context["button"] = _("Create")
         return context
 
 
@@ -47,6 +48,7 @@ class TaskUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["title"] = _("Edit the task")
+        context["button"] = _("Update")
         return context
 
 

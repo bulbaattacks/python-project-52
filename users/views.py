@@ -33,6 +33,7 @@ class UserCreateView(SuccessMessageMixin, CreateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["title"] = _("Registration")
+        context["button"] = _("Registrate")
         return context
 
 
@@ -59,6 +60,7 @@ class UserUpdateView(LoginRequiredMixin, UserPassesTestMixin, SuccessMessageMixi
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["title"] = _("Edit the user")
+        context["button"] = _("Update")
         return context
 
 
