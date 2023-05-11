@@ -23,8 +23,8 @@ class TaskFilter(FilterSet):
                               widget=forms.Select(
                                   attrs={'class': 'custom-select d-block'}))
 
-    assignee = ModelChoiceFilter(queryset=User.objects.all(),
-                                 label=_('Assignee'),
+    executor = ModelChoiceFilter(queryset=User.objects.all(),
+                                 label=_('Executor'),
                                  widget=forms.Select(
                                      attrs={'class': 'custom-select d-block'}))
 
@@ -36,4 +36,4 @@ class TaskFilter(FilterSet):
 
     class Meta:
         model = Task
-        fields = ['status', 'label', 'assignee', 'mine']
+        fields = ['status', 'label', 'executor', 'mine']

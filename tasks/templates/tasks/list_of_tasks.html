@@ -26,7 +26,7 @@
             <th>{% translate "Name" %}</th>
             <th>{% translate "Status" %}</th>
             <th>{% translate "Author" %}</th>
-            <th>{% translate "Assigned to" %}</th>
+            <th>{% translate "Executor" %}</th>
             <th>{% translate "Date of creation" %}</th>
             <th></th>
         </tr>
@@ -38,11 +38,11 @@
             <td>{{ task.name }}</td>
             <td>{{ task.status }}</td>
             <td>{{ task.creator }}</td>
-            {% if task.assignee == None %}
+            {% if task.executor == None %}
             <td> </td>
             {% endif %}
-            {% if task.assignee != None %}
-            <td>{{ task.assignee }}</td>
+            {% if task.executor != None %}
+            <td>{{ task.executor }}</td>
             {% endif %}
             <td>{{ task.created_at }}</td>
             <td>
