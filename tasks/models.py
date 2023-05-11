@@ -11,7 +11,7 @@ class Task(models.Model):
     status = models.ForeignKey(Status, on_delete=models.PROTECT)
     creator = models.ForeignKey(User, related_name='creator', on_delete=models.PROTECT)
     executor = models.ForeignKey(User, related_name='executor', on_delete=models.PROTECT, null=True, blank=True)
-    label = models.ManyToManyField(Label, blank=True)
+    labels = models.ManyToManyField(Label, blank=True)
 
     def __str__(self):
         return self.name
