@@ -52,7 +52,7 @@ class LabelDeleteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
 
     def post(self, request, *args, **kwargs):
         label_id = kwargs.get('pk')
-        if Task.objects.filter(label=label_id):
+        if Task.objects.filter(labels=label_id):
             messages.add_message(request, messages.ERROR, _("Can't delete the label because it's used for the task"))
             return HttpResponseRedirect(reverse_lazy('labels_list'))
         messages.add_message(request, messages.SUCCESS, _("Label was deleted successfully"))
