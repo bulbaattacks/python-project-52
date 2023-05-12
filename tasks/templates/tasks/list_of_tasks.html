@@ -42,7 +42,7 @@
             <td> </td>
             {% endif %}
             {% if task.executor != None %}
-            <td>{{ task.executor }}</td>
+            <td>{{ task.executor.first_name }} {{ task.executor.last_name }}</td>
             {% endif %}
             <td>{{ task.created_at }}</td>
             <td>
