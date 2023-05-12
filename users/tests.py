@@ -4,8 +4,10 @@ from .models import User
 
 class UserTestCase(TestCase):
     def setUp(self):
-        User.objects.create(first_name="Ivan", last_name="Ivanyan", username="roar", password='tyubnm678')
-        User.objects.create(first_name="Arina", last_name="Zubova", username="zub", password='bnmtyu890')
+        User.objects.create(first_name="Ivan", last_name="Ivanyan",
+                            username="roar", password='tyubnm678')
+        User.objects.create(first_name="Arina", last_name="Zubova",
+                            username="zub", password='bnmtyu890')
 
     def test_user_create(self):
         """User is created correctly"""

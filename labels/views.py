@@ -53,7 +53,8 @@ class LabelDeleteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
     def post(self, request, *args, **kwargs):
         label_id = kwargs.get('pk')
         if Task.objects.filter(labels=label_id):
-            messages.add_message(request, messages.ERROR, _("Can't delete the label because it's used for the task"))
+            messages.add_message(request, messages.ERROR,
+                                 _("Can't delete the label because it's used for the task"))
             return HttpResponseRedirect(reverse_lazy('labels_list'))
         messages.add_message(request, messages.SUCCESS, _("Label was deleted successfully"))
         return self.delete(request, *args, **kwargs)
@@ -62,5 +63,3 @@ class LabelDeleteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
         context = super().get_context_data(**kwargs)
         context["title"] = _("Delete the label")
         return context
-
-

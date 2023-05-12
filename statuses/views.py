@@ -53,7 +53,8 @@ class StatusDeleteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
     def post(self, request, *args, **kwargs):
         status_id = kwargs.get('pk')
         if Task.objects.filter(status=status_id):
-            messages.add_message(request, messages.ERROR, _("Can't delete the status because it's used for the task"))
+            messages.add_message(request, messages.ERROR,
+                                 _("Can't delete the status because it's used for the task"))
             return HttpResponseRedirect(reverse_lazy('statuses_list'))
         messages.add_message(request, messages.SUCCESS, _("Status was deleted successfully"))
         return self.delete(request, *args, **kwargs)

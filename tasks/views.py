@@ -1,4 +1,3 @@
-from django.views.generic import ListView
 from django.urls import reverse_lazy
 from django.contrib.messages.views import SuccessMessageMixin
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
