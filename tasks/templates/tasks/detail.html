@@ -27,20 +27,28 @@
     </div>
 
     <div class="row">
-        <div class="col-md-6">{% translate "Created At" %}</div>
+        <div class="col-md-6">{% translate "Date of creation" %}</div>
         <div class="col-md-6">{{ task.created_at }}</div>
     </div>
 
     <div class="row">
         <div class="col-md-6">{% translate "Labels" %}</div>
         <div class="col-md-6">
-            {% for label in task.labels.all %}
-                #{{ label }}
+            <ul>{% for label in task.labels.all %}
+                <li>{{ label }}</li>
             {% endfor %}
+            </ul>
         </div>
     </div>
 
     </div>
+    <td>
+    <a href="/tasks/{{ task.id }}/update/">{% translate "Update" %}</a>
+    <br>
+    <a href="/tasks/{{ task.id }}/delete/">{% translate "Delete" %}</a>
+</td>
 </div>
+
+
 
 {% endblock %}
