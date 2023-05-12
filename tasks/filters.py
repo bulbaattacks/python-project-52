@@ -25,9 +25,8 @@ class TaskFilter(FilterSet):
                                   attrs={'class': 'custom-select d-block'}))
 
     def my_task_filter(self, queryset, name, value):
-        if value:
-            return queryset.filter(executor=self.request.user.id)
-        return queryset
+        lookup = queryset.filter(creator=self.request.user)
+        return lookup if value else queryset
 
     mine = BooleanFilter(label=_('My tasks only'),
                          widget=forms.widgets.CheckboxInput(
@@ -37,4 +36,4 @@ class TaskFilter(FilterSet):
 
     class Meta:
         model = Task
-        fields = ['status', 'label', 'executor', 'mine']
+        fields = ['status', 'executor', 'label', 'mine']
