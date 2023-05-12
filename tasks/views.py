@@ -2,6 +2,7 @@ from django.views.generic import ListView
 from django.urls import reverse_lazy
 from django.contrib.messages.views import SuccessMessageMixin
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
+from django.views.generic.detail import DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from tasks.models import Task
 from tasks.forms import TaskForm
@@ -16,6 +17,11 @@ class TasksListView(LoginRequiredMixin, FilterView):
     context_object_name = 'tasks'
     filterset_class = TaskFilter
     login_url = 'login'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["title"] = _("Tasks")
+        return context
 
 
 class TaskCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
@@ -61,4 +67,14 @@ class TaskDeleteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["title"] = _("Delete the task")
+        return context
+
+
+class TaskDetailView(LoginRequiredMixin, SuccessMessageMixin, DetailView):
+    model = Task
+    template_name = "tasks/detail.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["title"] = _("View the task")
         return context

@@ -7,8 +7,8 @@
 
 
 {% block content %}
-<h1 class="my-4">{% translate "Tasks" %}</h1>
 
+<h1 class="my-4">{{ title }}</h1>
 <div class="card-body bg-light">
     <form class="form-inline center" method="get">
         {% bootstrap_form filter.form size='small' %}
@@ -35,7 +35,7 @@
     <tbody>
         <tr>
             <td>{{ task.id }}</td>
-            <td>{{ task.name }}</td>
+            <td><a href="/tasks/{{ task.id }}">{{ task.name }}</a></td>
             <td>{{ task.status }}</td>
             <td>{{ task.creator }}</td>
             {% if task.executor == None %}
