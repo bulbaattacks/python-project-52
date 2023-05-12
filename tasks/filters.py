@@ -8,7 +8,6 @@ from django.utils.translation import gettext_lazy as _
 
 
 class TaskFilter(FilterSet):
-
     status = ModelChoiceFilter(queryset=Status.objects.all(),
                                label=_('Status'),
                                widget=forms.Select(
@@ -19,10 +18,10 @@ class TaskFilter(FilterSet):
                                  widget=forms.Select(
                                      attrs={'class': 'custom-select d-block'}))
 
-    label = ModelChoiceFilter(queryset=Label.objects.all(),
-                              label=_('Label'),
-                              widget=forms.Select(
-                                  attrs={'class': 'custom-select d-block'}))
+    labels = ModelChoiceFilter(queryset=Label.objects.all(),
+                               label=_('Label'),
+                               widget=forms.Select(
+                                   attrs={'class': 'custom-select d-block'}))
 
     def my_task_filter(self, queryset, name, value):
         lookup = queryset.filter(creator=self.request.user)
@@ -36,4 +35,4 @@ class TaskFilter(FilterSet):
 
     class Meta:
         model = Task
-        fields = ['status', 'executor', 'label', 'mine']
+        fields = ['status', 'executor', 'labels', 'mine']
