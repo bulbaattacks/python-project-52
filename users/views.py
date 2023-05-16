@@ -43,7 +43,6 @@ class UserUpdateView(LoginRequiredMixin, UserPassesTestMixin, SuccessMessageMixi
     template_name = 'users/edit.html'
     success_url = reverse_lazy('users_list')
     success_message = _("User was updated successfully")
-    login_url = reverse_lazy('login')
 
     def test_func(self):
         user = self.get_object()
@@ -69,7 +68,7 @@ class UserDeleteView(LoginRequiredMixin, UserPassesTestMixin, SuccessMessageMixi
     template_name = 'users/delete.html'
     success_url = reverse_lazy('users_list')
     success_message = _("User was deleted successfully")
-    login_url = reverse_lazy('login')
+    permission_denied_message = "Ауф"
 
     def test_func(self):
         user = self.get_object()
