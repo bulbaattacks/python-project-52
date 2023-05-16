@@ -6,7 +6,6 @@ from labels.models import Label
 from django.utils.translation import gettext_lazy as _
 from django.urls import reverse_lazy
 from labels.forms import LabelForm
-from tasks.models import Task
 from django.contrib import messages
 from django.http import HttpResponseRedirect
 
