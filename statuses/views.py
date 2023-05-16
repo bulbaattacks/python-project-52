@@ -23,12 +23,9 @@ class StatusCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     template_name = "statuses/edit.html"
     success_url = reverse_lazy('statuses_list')
     success_message = _("Status was created successfully")
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["title"] = _("Create status")
-        context["button"] = _("Create")
-        return context
+    extra_context = {"title": _("Create status"),
+                     "button": _("Create")
+                     }
 
 
 class StatusUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
@@ -37,18 +34,18 @@ class StatusUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     template_name = 'statuses/edit.html'
     success_url = reverse_lazy('statuses_list')
     success_message = _("Status was updated successfully")
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["title"] = _("Edit the status")
-        context["button"] = _("Update")
-        return context
+    extra_context = {"title": _("Edit the status"),
+                     "button": _("Update")
+                     }
 
 
 class StatusDeleteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
     model = Status
     template_name = 'statuses/delete.html'
     success_url = reverse_lazy('statuses_list')
+    extra_context = {"title": _("Delete the status"),
+                     "button": _("Yes, delete")
+                     }
 
     def post(self, request, *args, **kwargs):
         status_id = kwargs.get('pk')
@@ -58,8 +55,3 @@ class StatusDeleteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
             return HttpResponseRedirect(reverse_lazy('statuses_list'))
         messages.add_message(request, messages.SUCCESS, _("Status was deleted successfully"))
         return self.delete(request, *args, **kwargs)
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["title"] = _("Delete the status")
-        return context

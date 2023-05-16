@@ -52,7 +52,8 @@ class TaskDeleteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
     template_name = "tasks/delete.html"
     success_url = reverse_lazy('tasks_list')
     success_message = _("Task was deleted successfully")
-    extra_context = {"title": _("Delete the task")}
+    extra_context = {"title": _("Delete the task"),
+                     "button": _("Yes, delete")}
 
 
 class TaskDetailView(LoginRequiredMixin, SuccessMessageMixin, DetailView):
