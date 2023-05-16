@@ -16,11 +16,7 @@ class TasksListView(LoginRequiredMixin, FilterView):
     context_object_name = 'tasks'
     filterset_class = TaskFilter
     login_url = 'login'
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["title"] = _("Tasks")
-        return context
+    extra_context = {"title": _("Tasks")}
 
 
 class TaskCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
@@ -29,18 +25,15 @@ class TaskCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     template_name = "tasks/edit.html"
     success_url = reverse_lazy('tasks_list')
     success_message = _("Task was created successfully")
+    extra_context = {"title": _("Create task"),
+                     "button": _("Create")
+                     }
 
     def form_valid(self, form):
         """If the form is valid, add creator of the task and save the associated model."""
         form.instance.creator = self.request.user
         self.object = form.save()
         return super().form_valid(form)
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["title"] = _("Create task")
-        context["button"] = _("Create")
-        return context
 
 
 class TaskUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
@@ -49,12 +42,9 @@ class TaskUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     template_name = "tasks/edit.html"
     success_url = reverse_lazy('tasks_list')
     success_message = _("Task was updated successfully")
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["title"] = _("Edit the task")
-        context["button"] = _("Update")
-        return context
+    extra_context = {"title": _("Edit the task"),
+                     "button": _("Update")
+                     }
 
 
 class TaskDeleteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
@@ -62,18 +52,10 @@ class TaskDeleteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
     template_name = "tasks/delete.html"
     success_url = reverse_lazy('tasks_list')
     success_message = _("Task was deleted successfully")
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["title"] = _("Delete the task")
-        return context
+    extra_context = {"title": _("Delete the task")}
 
 
 class TaskDetailView(LoginRequiredMixin, SuccessMessageMixin, DetailView):
     model = Task
     template_name = "tasks/detail.html"
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["title"] = _("View the task")
-        return context
+    extra_context = {"title": _("View the task")}
