@@ -1,6 +1,5 @@
 from django.test import TestCase
 from .models import User
-from django.test import Client
 
 
 class UserTestCase(TestCase):
@@ -27,4 +26,3 @@ class UserTestCase(TestCase):
         self.assertEqual(user2.last_name, "Kant")
 
     '''обязуюсь написать нормальные тесты'''
-
