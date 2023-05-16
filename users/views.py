@@ -13,6 +13,23 @@ from tasks.models import Task
 from django.http import HttpResponseRedirect
 
 
+class UserPermissionCustomMixin(LoginRequiredMixin, UserPassesTestMixin):
+    permission_denied_message = _("You have no right to edit the user.")
+    not_auth_message = _("You are not authored! Please, log in.")
+
+    def test_func(self):
+        user = self.get_object()
+        return user.id == self.request.user.id
+
+    def handle_no_permission(self):
+        if self.request.user.is_authenticated:
+            messages.error(self.request, _("You have no right to edit the user."))
+            return redirect(reverse_lazy('users_list'))
+        else:
+            messages.error(self.request, _("You are not authored! Please, log in."))
+            return redirect(reverse_lazy('login'))
+
+
 class UsersListView(ListView):
     model = User
     template_name = "users/list_of_users.html"
@@ -37,24 +54,12 @@ class UserCreateView(SuccessMessageMixin, CreateView):
         return context
 
 
-class UserUpdateView(LoginRequiredMixin, UserPassesTestMixin, SuccessMessageMixin, UpdateView):
+class UserUpdateView(UserPermissionCustomMixin, SuccessMessageMixin, UpdateView):
     model = User
     form_class = UserForm
     template_name = 'users/edit.html'
     success_url = reverse_lazy('users_list')
     success_message = _("User was updated successfully")
-
-    def test_func(self):
-        user = self.get_object()
-        return user.id == self.request.user.id
-
-    def handle_no_permission(self):
-        if self.request.user.is_authenticated:
-            messages.error(self.request, _("You have no right to edit the user."))
-            return redirect(reverse_lazy('users_list'))
-        else:
-            messages.error(self.request, _("You are not authored! Please, log in."))
-            return redirect(reverse_lazy('login'))
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -63,24 +68,11 @@ class UserUpdateView(LoginRequiredMixin, UserPassesTestMixin, SuccessMessageMixi
         return context
 
 
-class UserDeleteView(LoginRequiredMixin, UserPassesTestMixin, SuccessMessageMixin, DeleteView):
+class UserDeleteView(UserPermissionCustomMixin, SuccessMessageMixin, DeleteView):
     model = User
     template_name = 'users/delete.html'
     success_url = reverse_lazy('users_list')
     success_message = _("User was deleted successfully")
-    permission_denied_message = "Ауф"
-
-    def test_func(self):
-        user = self.get_object()
-        return user.id == self.request.user.id
-
-    def handle_no_permission(self):
-        if self.request.user.is_authenticated:
-            messages.error(self.request, _("You have no right to edit the user."))
-            return redirect(reverse_lazy('users_list'))
-        else:
-            messages.error(self.request, _("You are not authored! Please, log in."))
-            return redirect(reverse_lazy('login'))
 
     def post(self, request, *args, **kwargs):
         if Task.objects.filter(id=self.request.user.id):
