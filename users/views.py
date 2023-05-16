@@ -33,11 +33,7 @@ class UserPermissionCustomMixin(LoginRequiredMixin, UserPassesTestMixin):
 class UsersListView(ListView):
     model = User
     template_name = "users/list_of_users.html"
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["created_at"] = timezone.now()
-        return context
+    extra_context = {"created_at": timezone.now()}
 
 
 class UserCreateView(SuccessMessageMixin, CreateView):
@@ -46,12 +42,9 @@ class UserCreateView(SuccessMessageMixin, CreateView):
     template_name = "users/edit.html"
     success_url = reverse_lazy("login")
     success_message = _("User was created successfully")
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["title"] = _("Registration")
-        context["button"] = _("Registrate")
-        return context
+    extra_context = {"title": _("Registration"),
+                     "button":_("Registrate")
+                     }
 
 
 class UserUpdateView(UserPermissionCustomMixin, SuccessMessageMixin, UpdateView):
@@ -60,12 +53,9 @@ class UserUpdateView(UserPermissionCustomMixin, SuccessMessageMixin, UpdateView)
     template_name = 'users/edit.html'
     success_url = reverse_lazy('users_list')
     success_message = _("User was updated successfully")
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["title"] = _("Edit the user")
-        context["button"] = _("Update")
-        return context
+    extra_context = {"title": _("Edit the user"),
+                     "button": _("Update")
+                     }
 
 
 class UserDeleteView(UserPermissionCustomMixin, SuccessMessageMixin, DeleteView):
@@ -73,6 +63,9 @@ class UserDeleteView(UserPermissionCustomMixin, SuccessMessageMixin, DeleteView)
     template_name = 'users/delete.html'
     success_url = reverse_lazy('users_list')
     success_message = _("User was deleted successfully")
+    extra_context = {"title": _("Delete the user"),
+                     "button": _("Yes, delete")
+                     }
 
     def post(self, request, *args, **kwargs):
         if Task.objects.filter(id=self.request.user.id):
@@ -81,8 +74,3 @@ class UserDeleteView(UserPermissionCustomMixin, SuccessMessageMixin, DeleteView)
             return HttpResponseRedirect(reverse_lazy('statuses_list'))
         messages.add_message(request, messages.SUCCESS, _("User was deleted successfully"))
         return self.delete(request, *args, **kwargs)
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["title"] = _("Delete the user")
-        return context
