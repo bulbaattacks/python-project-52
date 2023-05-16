@@ -23,12 +23,9 @@ class LabelCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     template_name = "labels/edit.html"
     success_url = reverse_lazy("labels_list")
     success_message = _("Label was created successfully")
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["title"] = _("Create label")
-        context["button"] = _("Create")
-        return context
+    extra_context = {"title": _("Create label"),
+                     "button": _("Create")
+                     }
 
 
 class LabelUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
@@ -37,18 +34,18 @@ class LabelUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     template_name = "labels/edit.html"
     success_url = reverse_lazy("labels_list")
     success_message = _("Label was updated successfully")
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["title"] = _("Edit the label")
-        context["button"] = _("Update")
-        return context
+    extra_context = {"title": _("Edit the label"),
+                     "button": _("Update")
+                     }
 
 
 class LabelDeleteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
     model = Label
     template_name = "labels/delete.html"
     success_url = reverse_lazy("labels_list")
+    extra_context = {"title": _("Delete the label"),
+                     "button": _("Yes, delete")
+                     }
 
     def post(self, request, *args, **kwargs):
         label_id = kwargs.get('pk')
@@ -58,8 +55,3 @@ class LabelDeleteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
             return HttpResponseRedirect(reverse_lazy('labels_list'))
         messages.add_message(request, messages.SUCCESS, _("Label was deleted successfully"))
         return self.delete(request, *args, **kwargs)
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["title"] = _("Delete the label")
-        return context
