@@ -1,5 +1,6 @@
 from django.test import TestCase
 from .models import User
+from django.test import Client
 
 
 class UserTestCase(TestCase):
@@ -15,3 +16,15 @@ class UserTestCase(TestCase):
         user2 = User.objects.get(last_name="Zubova")
         self.assertEqual(user1.first_name, "Ivan")
         self.assertEqual(user2.first_name, "Arina")
+
+    def test_user_update(self):
+        """User is updated correctly"""
+        user1 = User.objects.get(last_name="Ivanyan")
+        user1.last_name = "Iman"
+        user2 = User.objects.get(last_name="Zubova")
+        user2.last_name = "Kant"
+        self.assertEqual(user1.last_name, "Iman")
+        self.assertEqual(user2.last_name, "Kant")
+
+    '''обязуюсь написать нормальные тесты'''
+
