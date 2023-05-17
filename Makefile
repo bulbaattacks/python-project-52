@@ -12,7 +12,7 @@ repl:
 	python manage.py shell
 
 
-makemigrations:
+make-migrations:
 	poetry run python manage.py makemigrations
 
 
@@ -24,11 +24,11 @@ test:
 	poetry run python manage.py test
 
 
-makemess:
+make-messages:
 	django-admin makemessages -l ru
 
 
-compilemess:
+compile-messages:
 	django-admin compilemessages
 
 shell:
