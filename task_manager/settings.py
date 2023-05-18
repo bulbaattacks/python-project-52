@@ -160,3 +160,5 @@ ROLLBAR = {
     'branch': 'master',
     'root': os.getcwd(),
 }
+
+FIXTURE_DIRS = [os.path.join(BASE_DIR, 'fixtures')]

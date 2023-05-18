@@ -1,0 +1,56 @@
+[
+{
+    "model": "users.user",
+    "pk": 1,
+    "fields": {
+        "password": "!M4dygH3ZWfd0214U59OR9nlwsRJ94HUZtvQciG8y",
+        "last_login": "2023-05-11T14:36:01.779Z",
+        "is_superuser": true,
+        "username": "Big Head",
+        "first_name": "Nelson",
+        "last_name": "Bighetti",
+        "email": "nelson_bighetti@gmail.com",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2023-04-11T05:54:52.947Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "users.user",
+    "pk": 2,
+    "fields": {
+        "password": "!M4dygH3ZShn0214T69OR9nlwsRJ94HUZtvQciG8y",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "Blade",
+        "first_name": "Boris",
+        "last_name": "Yurinov",
+        "email": "boris_yurinov@gmail.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2023-04-11T05:58:54Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "users.user",
+    "pk": 3,
+    "fields": {
+        "password": "!Q2dsxH3ZWfd0784U545R9nlwsRJ94HUZtvFciG8y",
+        "last_login": "2023-05-11T10:05:40Z",
+        "is_superuser": false,
+        "username": "Cap'n'Cook",
+        "first_name": "Jesse",
+        "last_name": "Pinkman",
+        "email": "jesse_pinkman@gmail.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2023-04-11T06:00:02Z",
+        "groups": [],
+        "user_permissions": []
+    }
+}
+]

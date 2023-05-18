@@ -1,0 +1,10 @@
+[
+  {
+    "model": "statuses.status",
+    "pk": 1,
+    "fields": {
+        "time_create": "2023-05-06T11:28:38.384Z",
+        "name": "В работе"
+    }
+  }
+]
