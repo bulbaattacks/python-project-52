@@ -17,6 +17,7 @@ class UserTestCase(TestCase):
                           "first_name": "Anderson",
                           "password1": "mystupidpassword1234",
                           "password2": "mystupidpassword1234"}
+
     def test_users_list(self):
         response = self.client.get(reverse("users_list"))
         self.assertEqual(response.status_code, 200)
