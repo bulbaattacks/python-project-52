@@ -280,7 +280,7 @@ msgstr "Изменение пользователя"
 
 #: users/views.py:65 users/views.py:75
 msgid "User was deleted successfully"
-msgstr "Пользователь успешно удалён"
+msgstr "Пользователь успешно удален"
 
 #: users/views.py:66
 msgid "Delete the user"
