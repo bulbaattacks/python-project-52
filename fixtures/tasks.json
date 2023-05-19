@@ -1,0 +1,46 @@
+[
+{
+    "model": "tasks.task",
+    "pk": 1,
+    "fields": {
+        "name": "Купить молока",
+        "description": "Молоко 3%, 2 шт",
+        "created_at": "2023-04-11T05:54:52.947Z",
+        "status": 1,
+        "creator": 1,
+        "executor": 2
+    }
+},
+    {
+    "model": "tasks.task",
+    "pk": 2,
+    "fields": {
+        "name": "Написать тесты",
+        "description": "Покрыть код тестами: users, statuses, labels, tasks",
+        "created_at": "2023-04-11T05:54:52.947Z",
+        "status": 2,
+        "creator": 2,
+        "executor": 3
+    }
+},
+    {
+    "model": "tasks.task",
+    "pk": 3,
+    "fields": {
+        "name": "Таблетка от глистов",
+        "description": "Дать собаке таблетку от глистов",
+        "created_at": "2023-04-11T05:54:52.947Z",
+        "status": 3,
+        "creator": 3,
+        "executor": 1
+    }
+},
+    {
+    "model": "tasks.task_labels",
+    "pk": 5,
+    "fields": {
+        "task_id": 1,
+        "label_id": 1
+    }
+}
+]

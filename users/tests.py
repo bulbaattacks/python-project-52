@@ -21,7 +21,7 @@ class UserTestCase(TestCase):
     def test_users_list(self):
         response = self.client.get(reverse("users_list"))
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, text='Пользователи')
+        self.assertContains(response, text="Пользователи")
 
     def test_create_user(self):
         response = self.client.get(reverse("user_create"))
