@@ -5,7 +5,7 @@ from users.models import User
 from django.core.exceptions import ObjectDoesNotExist
 
 
-class UserTestCase(TestCase):
+class TaskTestCase(TestCase):
     fixtures = ["tasks.json", "users.json", "statuses.json", "labels.json"]
 
     def setUp(self):
