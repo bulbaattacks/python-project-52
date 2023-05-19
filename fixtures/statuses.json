@@ -1,10 +1,26 @@
 [
-  {
-    "model": "statuses.status",
-    "pk": 1,
-    "fields": {
-        "time_create": "2023-05-06T11:28:38.384Z",
-        "name": "В работе"
+    {
+        "pk": "1",
+        "model": "statuses.status",
+        "fields": {
+            "created_at": "2023-05-06T11:28:38.384Z",
+            "name": "В работе"
+        }
+    },
+    {
+        "pk": "2",
+        "model": "statuses.status",
+        "fields": {
+            "created_at": "2023-05-06T11:28:39.384Z",
+            "name": "Заркыта"
+        }
+    },
+    {
+        "pk": "3",
+        "model": "statuses.status",
+        "fields": {
+            "created_at": "2023-05-06T11:29:38.384Z",
+            "name": "Открыта"
+        }
     }
-  }
 ]

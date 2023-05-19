@@ -38,7 +38,7 @@ class UserTestCase(TestCase):
         response = self.client.post(reverse("user_update", args=[3]), self.form_data, follow=True)
         self.assertEqual(response.status_code, 200)
         self.assertTrue(User.objects.get(id=3))
-        self.assertContains(response, text="Пользователь успешно изменён")
+        self.assertContains(response, text="Пользователь успешно изменен")
 
     def test_update_user_with_no_permission(self):
         self.client.force_login(self.user3)
@@ -52,7 +52,7 @@ class UserTestCase(TestCase):
         response = self.client.post(reverse("user_delete", args=[3]), follow=True)
         self.assertEqual(response.status_code, 200)
         self.assertRedirects(response, reverse("users_list"))
-        self.assertContains(response, text="Пользователь успешно удалён")
+        self.assertContains(response, text="Пользователь успешно удален")
         with self.assertRaises(ObjectDoesNotExist):
             self.assertFalse(User.objects.get(id=3))
 
