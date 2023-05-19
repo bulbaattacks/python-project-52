@@ -1,26 +1,26 @@
 [
     {
         "pk": "1",
-        "model": "statuses.status",
+        "model": "labels.label",
         "fields": {
             "created_at": "2023-05-06T11:28:38.384Z",
-            "name": "В работе"
+            "name": "редизайн"
         }
     },
     {
         "pk": "2",
-        "model": "statuses.status",
+        "model": "labels.label",
         "fields": {
             "created_at": "2023-05-06T11:28:39.384Z",
-            "name": "Закрыта"
+            "name": "для магазинов"
         }
     },
     {
         "pk": "3",
-        "model": "statuses.status",
+        "model": "labels.label",
         "fields": {
             "created_at": "2023-05-06T11:29:38.384Z",
-            "name": "Открыта"
+            "name": "для партнеров"
         }
     }
 ]

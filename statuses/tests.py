@@ -21,7 +21,7 @@ class UserTestCase(TestCase):
         self.client.force_login(self.user1)
         response = self.client.get(reverse("statuses_list"))
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, text='Статусы')
+        self.assertContains(response, text="Статусы")
 
     def test_create_status(self):
         self.client.force_login(self.user1)
@@ -33,7 +33,7 @@ class UserTestCase(TestCase):
         self.assertContains(response, text="Статус успешно создан")
 
     def test_update_status(self):
-        self.client.force_login(self.user1)
+        self.client.force_login(self.user2)
         response = self.client.get(reverse("status_update", args=[2]))
         self.assertEqual(response.status_code, 200)
         response = self.client.post(reverse("status_update", args=[2]), self.form_data, follow=True)
@@ -42,7 +42,7 @@ class UserTestCase(TestCase):
         self.assertContains(response, text="Статус успешно изменен")
 
     def test_delete_status(self):
-        self.client.force_login(self.user1)
+        self.client.force_login(self.user3)
         response = self.client.get(reverse("status_delete", args=[3]))
         self.assertEqual(response.status_code, 200)
         response = self.client.post(reverse("status_delete", args=[3]), follow=True)
