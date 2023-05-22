@@ -3,6 +3,7 @@ from django.urls import reverse
 from .models import Label
 from users.models import User
 from django.core.exceptions import ObjectDoesNotExist
+from django.utils.translation import gettext_lazy as _
 
 
 class LabelTestCase(TestCase):
@@ -21,7 +22,7 @@ class LabelTestCase(TestCase):
         self.client.force_login(self.user1)
         response = self.client.get(reverse("labels_list"))
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, text="Метки")
+        self.assertContains(response, text=_("Labels"))
 
     def test_create_status(self):
         self.client.force_login(self.user1)
@@ -30,7 +31,7 @@ class LabelTestCase(TestCase):
         response = self.client.post(reverse("label_create"), self.form_data, follow=True)
         self.assertRedirects(response, reverse("labels_list"))
         self.assertTrue(Label.objects.get(id=4))
-        self.assertContains(response, text="Метка успешно создана")
+        self.assertContains(response, text=_("Label was created successfully"))
 
     def test_update_status(self):
         self.client.force_login(self.user2)
@@ -39,7 +40,7 @@ class LabelTestCase(TestCase):
         response = self.client.post(reverse("label_update", args=[2]), self.form_data, follow=True)
         self.assertRedirects(response, reverse("labels_list"))
         self.assertTrue(Label.objects.get(id=3))
-        self.assertContains(response, text="Метка успешно изменена")
+        self.assertContains(response, text=_("Label was updated successfully"))
 
     def test_delete_status(self):
         self.client.force_login(self.user3)
@@ -49,4 +50,4 @@ class LabelTestCase(TestCase):
         self.assertRedirects(response, reverse("labels_list"))
         with self.assertRaises(ObjectDoesNotExist):
             self.assertFalse(Label.objects.get(pk=2))
-        self.assertContains(response, text="Метка успешно удалена")
+        self.assertContains(response, text=_("Label was deleted successfully"))

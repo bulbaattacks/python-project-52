@@ -3,6 +3,7 @@ from django.urls import reverse
 from .models import Task
 from users.models import User
 from django.core.exceptions import ObjectDoesNotExist
+from django.utils.translation import gettext_lazy as _
 
 
 class TaskTestCase(TestCase):
@@ -26,7 +27,7 @@ class TaskTestCase(TestCase):
         self.client.force_login(self.user1)
         response = self.client.get(reverse("tasks_list"))
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, text="Задачи")
+        self.assertContains(response, text=_("Tasks"))
 
     def test_create_task(self):
         self.client.force_login(self.user2)
@@ -35,7 +36,7 @@ class TaskTestCase(TestCase):
         response = self.client.post(reverse("task_create"), self.form_data, follow=True)
         self.assertRedirects(response, reverse("tasks_list"))
         self.assertTrue(Task.objects.get(id=4))
-        self.assertContains(response, text="Задача успешно создана")
+        self.assertContains(response, text=_("Task was created successfully"))
 
     def test_update_task(self):
         self.client.force_login(self.user3)
@@ -44,13 +45,13 @@ class TaskTestCase(TestCase):
         response = self.client.post(reverse("task_update", args=[3]), self.form_data, follow=True)
         self.assertEqual(response.status_code, 200)
         self.assertTrue(User.objects.get(id=3))
-        self.assertContains(response, text="адача успешно изменена")
+        self.assertContains(response, text=_("Task was updated successfully"))
 
     def test_delete_user(self):
         self.client.force_login(self.user1)
         response = self.client.post(reverse("task_delete", args=[3]), follow=True)
         self.assertEqual(response.status_code, 200)
         self.assertRedirects(response, reverse("tasks_list"))
-        self.assertContains(response, text="Задача успешно удалена")
+        self.assertContains(response, text=_("Task was deleted successfully"))
         with self.assertRaises(ObjectDoesNotExist):
             self.assertFalse(Task.objects.get(id=3))

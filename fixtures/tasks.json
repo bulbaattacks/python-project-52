@@ -3,8 +3,8 @@
     "model": "tasks.task",
     "pk": 1,
     "fields": {
-        "name": "Купить молока",
-        "description": "Молоко 3%, 2 шт",
+        "name": "Buy a milk",
+        "description": "milk 3%, 2 bottle",
         "created_at": "2023-04-11T05:54:52.947Z",
         "status": 1,
         "creator": 1,
@@ -15,8 +15,8 @@
     "model": "tasks.task",
     "pk": 2,
     "fields": {
-        "name": "Написать тесты",
-        "description": "Покрыть код тестами: users, statuses, labels, tasks",
+        "name": "Write tests",
+        "description": "Cover the code with tests: users, statuses, labels, tasks",
         "created_at": "2023-04-11T05:54:52.947Z",
         "status": 1,
         "creator": 2,
@@ -27,8 +27,8 @@
     "model": "tasks.task",
     "pk": 3,
     "fields": {
-        "name": "Таблетка от глистов",
-        "description": "Дать собаке таблетку от глистов",
+        "name": "Pill for parasites",
+        "description": "Give the dog a pill for parasites",
         "created_at": "2023-04-11T05:54:52.947Z",
         "status": 1,
         "creator": 3,

@@ -3,6 +3,7 @@ from django.urls import reverse
 from .models import Status
 from users.models import User
 from django.core.exceptions import ObjectDoesNotExist
+from django.utils.translation import gettext_lazy as _
 
 
 class StatusTestCase(TestCase):
@@ -21,7 +22,7 @@ class StatusTestCase(TestCase):
         self.client.force_login(self.user1)
         response = self.client.get(reverse("statuses_list"))
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, text="Статусы")
+        self.assertContains(response, text=_("Statuses"))
 
     def test_create_status(self):
         self.client.force_login(self.user1)
@@ -30,7 +31,7 @@ class StatusTestCase(TestCase):
         response = self.client.post(reverse("status_create"), self.form_data, follow=True)
         self.assertRedirects(response, reverse("statuses_list"))
         self.assertTrue(Status.objects.get(id=4))
-        self.assertContains(response, text="Статус успешно создан")
+        self.assertContains(response, text=_("Status was created successfully"))
 
     def test_update_status(self):
         self.client.force_login(self.user2)
@@ -39,7 +40,7 @@ class StatusTestCase(TestCase):
         response = self.client.post(reverse("status_update", args=[2]), self.form_data, follow=True)
         self.assertRedirects(response, reverse("statuses_list"))
         self.assertTrue(Status.objects.get(id=3))
-        self.assertContains(response, text="Статус успешно изменен")
+        self.assertContains(response, text=_("Status was updated successfully"))
 
     def test_delete_status(self):
         self.client.force_login(self.user3)
@@ -49,4 +50,4 @@ class StatusTestCase(TestCase):
         self.assertRedirects(response, reverse("statuses_list"))
         with self.assertRaises(ObjectDoesNotExist):
             self.assertFalse(Status.objects.get(pk=3))
-        self.assertContains(response, text="Статус успешно удален")
+        self.assertContains(response, text=_("Status was deleted successfully"))

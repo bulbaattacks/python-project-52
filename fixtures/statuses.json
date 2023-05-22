@@ -4,7 +4,7 @@
         "model": "statuses.status",
         "fields": {
             "created_at": "2023-05-06T11:28:38.384Z",
-            "name": "В работе"
+            "name": "In progress"
         }
     },
     {
@@ -12,7 +12,7 @@
         "model": "statuses.status",
         "fields": {
             "created_at": "2023-05-06T11:28:39.384Z",
-            "name": "Закрыта"
+            "name": "Closed"
         }
     },
     {
@@ -20,7 +20,7 @@
         "model": "statuses.status",
         "fields": {
             "created_at": "2023-05-06T11:29:38.384Z",
-            "name": "Открыта"
+            "name": "Reopened"
         }
     }
 ]
