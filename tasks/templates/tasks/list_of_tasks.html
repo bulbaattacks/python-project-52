@@ -35,7 +35,7 @@
     <tbody>
         <tr>
             <td>{{ task.id }}</td>
-            <td><a href="/tasks/{{ task.id }}">{{ task.name }}</a></td>
+            <td><a href="{% url 'task_detail' pk=task.id %}">{{ task.name }}</a></td>
             <td>{{ task.status }}</td>
             <td>{{ task.creator }}</td>
             {% if task.executor == None %}
@@ -46,9 +46,9 @@
             {% endif %}
             <td>{{ task.created_at }}</td>
             <td>
-                <a href="/tasks/{{ task.id }}/update/">{% translate "Update" %}</a>
+                <a href="{% url 'task_update' pk=task.id %}">{% translate "Update" %}</a>
                 <br>
-                <a href="/tasks/{{ task.id }}/delete/">{% translate "Delete" %}</a>
+                <a href="{% url 'task_delete' pk=task.id %}">{% translate "Delete" %}</a>
             </td>
         </tr>
         {% endfor %}

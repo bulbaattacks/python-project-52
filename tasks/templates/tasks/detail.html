@@ -43,9 +43,9 @@
 
     </div>
     <td>
-    <a href="/tasks/{{ task.id }}/update/">{% translate "Update" %}</a>
+    <a href="{% url 'task_update' pk=task.id %}">{% translate "Update" %}</a>
     <br>
-    <a href="/tasks/{{ task.id }}/delete/">{% translate "Delete" %}</a>
+    <a href="{% url 'task_delete' pk=task.id %}">{% translate "Delete" %}</a>
 </td>
 </div>
 
