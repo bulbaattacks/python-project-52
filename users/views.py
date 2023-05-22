@@ -9,6 +9,7 @@ from django.utils.translation import gettext_lazy as _
 from django.utils import timezone
 from tasks.models import Task
 from django.http import HttpResponseRedirect
+from .mixins import UserPermissionCustomMixin
 
 
 class UsersListView(ListView):
