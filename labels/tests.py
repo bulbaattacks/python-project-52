@@ -43,10 +43,10 @@ class LabelTestCase(TestCase):
 
     def test_delete_status(self):
         self.client.force_login(self.user3)
-        response = self.client.get(reverse("label_delete", args=[3]))
+        response = self.client.get(reverse("label_delete", args=[2]))
         self.assertEqual(response.status_code, 200)
-        response = self.client.post(reverse("label_delete", args=[3]), follow=True)
+        response = self.client.post(reverse("label_delete", args=[2]), follow=True)
         self.assertRedirects(response, reverse("labels_list"))
         with self.assertRaises(ObjectDoesNotExist):
-            self.assertFalse(Label.objects.get(pk=3))
+            self.assertFalse(Label.objects.get(pk=2))
         self.assertContains(response, text="Метка успешно удалена")
