@@ -36,14 +36,16 @@ class UserTestCase(TestCase):
         self.client.force_login(self.user3)
         response = self.client.get(reverse("user_update", args=[self.user3.pk]))
         self.assertEqual(response.status_code, 200)
-        response = self.client.post(reverse("user_update", args=[self.user3.pk]), self.form_data, follow=True)
+        response = self.client.post(reverse("user_update",
+                                            args=[self.user3.pk]), self.form_data, follow=True)
         self.assertEqual(response.status_code, 200)
         self.assertTrue(User.objects.get(id=self.user3.pk))
         self.assertContains(response, text=_("User was updated successfully"))
 
     def test_update_user_with_no_permission(self):
         self.client.force_login(self.user3)
-        response = self.client.post(reverse("user_update", args=[self.user2.pk]), self.form_data, follow=True)
+        response = self.client.post(reverse("user_update",
+                                            args=[self.user2.pk]), self.form_data, follow=True)
         self.assertRedirects(response, reverse("users_list"))
         self.assertContains(response, text=_("You have no right to edit the user."))
         self.assertTrue(User.objects.get(id=self.user3.pk))
@@ -67,7 +69,8 @@ class UserTestCase(TestCase):
 
     '''def test_delete_user_with_task(self):
         self.client.force_login(self.user3)
-        response = self.client.post(reverse("user_delete", args=[self.user2.pk]), follow=True)
+        response = self.client.post(reverse("user_delete", 
+        args=[self.user2.pk]), follow=True)
         self.assertEqual(response.status_code, 200)
         self.assertRedirects(response, reverse("users_list"))
         self.assertContains(response, text=_("Can't delete the user 

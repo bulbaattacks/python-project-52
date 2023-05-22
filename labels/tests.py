@@ -37,7 +37,8 @@ class LabelTestCase(TestCase):
         self.client.force_login(self.user2)
         response = self.client.get(reverse("label_update", args=[self.label2.pk]))
         self.assertEqual(response.status_code, 200)
-        response = self.client.post(reverse("label_update", args=[self.label2.pk]), self.form_data, follow=True)
+        response = self.client.post(reverse("label_update",
+                                            args=[self.label2.pk]), self.form_data, follow=True)
         self.assertRedirects(response, reverse("labels_list"))
         self.assertTrue(Label.objects.get(id=self.label2.pk))
         self.assertContains(response, text=_("Label was updated successfully"))

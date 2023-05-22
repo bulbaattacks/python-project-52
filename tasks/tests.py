@@ -42,7 +42,8 @@ class TaskTestCase(TestCase):
         self.client.force_login(self.user3)
         response = self.client.get(reverse("task_update", args=[self.task3.pk]))
         self.assertEqual(response.status_code, 200)
-        response = self.client.post(reverse("task_update", args=[self.task3.pk]), self.form_data, follow=True)
+        response = self.client.post(reverse("task_update",
+                                            args=[self.task3.pk]), self.form_data, follow=True)
         self.assertEqual(response.status_code, 200)
         self.assertTrue(User.objects.get(id=self.task3.pk))
         self.assertContains(response, text=_("Task was updated successfully"))

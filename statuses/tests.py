@@ -37,7 +37,8 @@ class StatusTestCase(TestCase):
         self.client.force_login(self.user2)
         response = self.client.get(reverse("status_update", args=[self.status2.pk]))
         self.assertEqual(response.status_code, 200)
-        response = self.client.post(reverse("status_update", args=[self.status2.pk]), self.form_data, follow=True)
+        response = self.client.post(reverse("status_update",
+                                            args=[self.status2.pk]), self.form_data, follow=True)
         self.assertRedirects(response, reverse("statuses_list"))
         self.assertTrue(Status.objects.get(id=self.status2.pk))
         self.assertContains(response, text=_("Status was updated successfully"))
