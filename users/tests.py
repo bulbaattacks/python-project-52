@@ -69,10 +69,10 @@ class UserTestCase(TestCase):
 
     '''def test_delete_user_with_task(self):
         self.client.force_login(self.user3)
-        response = self.client.post(reverse("user_delete", 
+        response = self.client.post(reverse("user_delete",
         args=[self.user2.pk]), follow=True)
         self.assertEqual(response.status_code, 200)
         self.assertRedirects(response, reverse("users_list"))
-        self.assertContains(response, text=_("Can't delete the user 
+        self.assertContains(response, text=_("Can't delete the user
         because it's used for the task."))
         self.assertTrue(User.objects.get(id=2))'''
