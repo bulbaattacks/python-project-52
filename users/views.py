@@ -53,6 +53,6 @@ class UserDeleteView(UserPermissionCustomMixin, SuccessMessageMixin, DeleteView)
         if Task.objects.filter(id=self.request.user.id):
             messages.add_message(request, messages.ERROR,
                                  _("Can't delete the user because it's used for the task"))
-            return HttpResponseRedirect(reverse_lazy('statuses_list'))
+            return HttpResponseRedirect(reverse_lazy('users_list'))
         messages.add_message(request, messages.SUCCESS, _("User was deleted successfully"))
         return self.delete(request, *args, **kwargs)
