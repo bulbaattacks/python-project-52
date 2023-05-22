@@ -35,19 +35,19 @@ class StatusTestCase(TestCase):
 
     def test_update_status(self):
         self.client.force_login(self.user2)
-        response = self.client.get(reverse("status_update", args=[2]))
+        response = self.client.get(reverse("status_update", args=[self.status2.pk]))
         self.assertEqual(response.status_code, 200)
-        response = self.client.post(reverse("status_update", args=[2]), self.form_data, follow=True)
+        response = self.client.post(reverse("status_update", args=[self.status2.pk]), self.form_data, follow=True)
         self.assertRedirects(response, reverse("statuses_list"))
-        self.assertTrue(Status.objects.get(id=3))
+        self.assertTrue(Status.objects.get(id=self.status2.pk))
         self.assertContains(response, text=_("Status was updated successfully"))
 
     def test_delete_status(self):
         self.client.force_login(self.user3)
-        response = self.client.get(reverse("status_delete", args=[3]))
+        response = self.client.get(reverse("status_delete", args=[self.status3.pk]))
         self.assertEqual(response.status_code, 200)
-        response = self.client.post(reverse("status_delete", args=[3]), follow=True)
+        response = self.client.post(reverse("status_delete", args=[self.status3.pk]), follow=True)
         self.assertRedirects(response, reverse("statuses_list"))
         with self.assertRaises(ObjectDoesNotExist):
-            self.assertFalse(Status.objects.get(pk=3))
+            self.assertFalse(Status.objects.get(pk=self.status3.pk))
         self.assertContains(response, text=_("Status was deleted successfully"))

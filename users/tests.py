@@ -34,40 +34,40 @@ class UserTestCase(TestCase):
 
     def test_update_user_with_permission(self):
         self.client.force_login(self.user3)
-        response = self.client.get(reverse("user_update", args=[3]))
+        response = self.client.get(reverse("user_update", args=[self.user3.pk]))
         self.assertEqual(response.status_code, 200)
-        response = self.client.post(reverse("user_update", args=[3]), self.form_data, follow=True)
+        response = self.client.post(reverse("user_update", args=[self.user3.pk]), self.form_data, follow=True)
         self.assertEqual(response.status_code, 200)
-        self.assertTrue(User.objects.get(id=3))
+        self.assertTrue(User.objects.get(id=self.user3.pk))
         self.assertContains(response, text=_("User was updated successfully"))
 
     def test_update_user_with_no_permission(self):
         self.client.force_login(self.user3)
-        response = self.client.post(reverse("user_update", args=[2]), self.form_data, follow=True)
+        response = self.client.post(reverse("user_update", args=[self.user2.pk]), self.form_data, follow=True)
         self.assertRedirects(response, reverse("users_list"))
         self.assertContains(response, text=_("You have no right to edit the user."))
-        self.assertTrue(User.objects.get(id=3))
+        self.assertTrue(User.objects.get(id=self.user3.pk))
 
     def test_delete_user(self):
         self.client.force_login(self.user3)
-        response = self.client.post(reverse("user_delete", args=[3]), follow=True)
+        response = self.client.post(reverse("user_delete", args=[self.user3.pk]), follow=True)
         self.assertEqual(response.status_code, 200)
         self.assertRedirects(response, reverse("users_list"))
         self.assertContains(response, text=_("User was deleted successfully"))
         with self.assertRaises(ObjectDoesNotExist):
-            self.assertFalse(User.objects.get(id=3))
+            self.assertFalse(User.objects.get(id=self.user3.pk))
 
     def test_delete_user_with_no_permission(self):
         self.client.force_login(self.user3)
-        response = self.client.post(reverse("user_delete", args=[2]), follow=True)
+        response = self.client.post(reverse("user_delete", args=[self.user2.pk]), follow=True)
         self.assertEqual(response.status_code, 200)
         self.assertRedirects(response, reverse("users_list"))
         self.assertContains(response, text=_("You have no right to edit the user."))
-        self.assertTrue(User.objects.get(id=2))
+        self.assertTrue(User.objects.get(id=self.user2.pk))
 
     '''def test_delete_user_with_task(self):
         self.client.force_login(self.user3)
-        response = self.client.post(reverse("user_delete", args=[2]), follow=True)
+        response = self.client.post(reverse("user_delete", args=[self.user2.pk]), follow=True)
         self.assertEqual(response.status_code, 200)
         self.assertRedirects(response, reverse("users_list"))
         self.assertContains(response, text=_("Can't delete the user because it's used for the task."))

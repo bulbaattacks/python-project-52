@@ -40,18 +40,18 @@ class TaskTestCase(TestCase):
 
     def test_update_task(self):
         self.client.force_login(self.user3)
-        response = self.client.get(reverse("task_update", args=[3]))
+        response = self.client.get(reverse("task_update", args=[self.task3.pk]))
         self.assertEqual(response.status_code, 200)
-        response = self.client.post(reverse("task_update", args=[3]), self.form_data, follow=True)
+        response = self.client.post(reverse("task_update", args=[self.task3.pk]), self.form_data, follow=True)
         self.assertEqual(response.status_code, 200)
-        self.assertTrue(User.objects.get(id=3))
+        self.assertTrue(User.objects.get(id=self.task3.pk))
         self.assertContains(response, text=_("Task was updated successfully"))
 
     def test_delete_user(self):
         self.client.force_login(self.user1)
-        response = self.client.post(reverse("task_delete", args=[3]), follow=True)
+        response = self.client.post(reverse("task_delete", args=[self.task3.pk]), follow=True)
         self.assertEqual(response.status_code, 200)
         self.assertRedirects(response, reverse("tasks_list"))
         self.assertContains(response, text=_("Task was deleted successfully"))
         with self.assertRaises(ObjectDoesNotExist):
-            self.assertFalse(Task.objects.get(id=3))
+            self.assertFalse(Task.objects.get(id=self.task3.pk))
