@@ -19,7 +19,7 @@ class LabelsListView(LoginRequiredMixin, ListView):
 class LabelCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     form_class = LabelForm
     model = Label
-    template_name = "labels/edit.html"
+    template_name = "edit.html"
     success_url = reverse_lazy("labels_list")
     success_message = _("Label was created successfully")
     extra_context = {"title": _("Create label"),
@@ -30,7 +30,7 @@ class LabelCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
 class LabelUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     model = Label
     form_class = LabelForm
-    template_name = "labels/edit.html"
+    template_name = "edit.html"
     success_url = reverse_lazy("labels_list")
     success_message = _("Label was updated successfully")
     extra_context = {"title": _("Edit the label"),
@@ -40,7 +40,7 @@ class LabelUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
 
 class LabelDeleteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
     model = Label
-    template_name = "labels/delete.html"
+    template_name = "delete.html"
     success_url = reverse_lazy("labels_list")
     extra_context = {"title": _("Delete the label"),
                      "button": _("Yes, delete")

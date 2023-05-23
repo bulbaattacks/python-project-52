@@ -22,7 +22,7 @@ class TasksListView(LoginRequiredMixin, FilterView):
 class TaskCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     model = Task
     form_class = TaskForm
-    template_name = "tasks/edit.html"
+    template_name = "edit.html"
     success_url = reverse_lazy('tasks_list')
     success_message = _("Task was created successfully")
     extra_context = {"title": _("Create task"),
@@ -39,7 +39,7 @@ class TaskCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
 class TaskUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     model = Task
     form_class = TaskForm
-    template_name = "tasks/edit.html"
+    template_name = "edit.html"
     success_url = reverse_lazy('tasks_list')
     success_message = _("Task was updated successfully")
     extra_context = {"title": _("Edit the task"),
@@ -49,7 +49,7 @@ class TaskUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
 
 class TaskDeleteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
     model = Task
-    template_name = "tasks/delete.html"
+    template_name = "delete.html"
     success_url = reverse_lazy('tasks_list')
     success_message = _("Task was deleted successfully")
     extra_context = {"title": _("Delete the task"),

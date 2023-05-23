@@ -20,7 +20,7 @@ class StatusesListView(LoginRequiredMixin, ListView):
 class StatusCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     form_class = StatusForm
     model = Status
-    template_name = "statuses/edit.html"
+    template_name = "edit.html"
     success_url = reverse_lazy('statuses_list')
     success_message = _("Status was created successfully")
     extra_context = {"title": _("Create status"),
@@ -31,7 +31,7 @@ class StatusCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
 class StatusUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     model = Status
     form_class = StatusForm
-    template_name = 'statuses/edit.html'
+    template_name = 'edit.html'
     success_url = reverse_lazy('statuses_list')
     success_message = _("Status was updated successfully")
     extra_context = {"title": _("Edit the status"),
@@ -41,7 +41,7 @@ class StatusUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
 
 class StatusDeleteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
     model = Status
-    template_name = 'statuses/delete.html'
+    template_name = 'delete.html'
     success_url = reverse_lazy('statuses_list')
     extra_context = {"title": _("Delete the status"),
                      "button": _("Yes, delete")

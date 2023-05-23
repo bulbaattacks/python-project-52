@@ -21,7 +21,7 @@ class UsersListView(ListView):
 class UserCreateView(SuccessMessageMixin, CreateView):
     form_class = UserForm
     model = User
-    template_name = "users/edit.html"
+    template_name = "edit.html"
     success_url = reverse_lazy("login")
     success_message = _("User was created successfully")
     extra_context = {"title": _("Registration"),
@@ -32,7 +32,7 @@ class UserCreateView(SuccessMessageMixin, CreateView):
 class UserUpdateView(UserPermissionCustomMixin, SuccessMessageMixin, UpdateView):
     model = User
     form_class = UserForm
-    template_name = 'users/edit.html'
+    template_name = 'edit.html'
     success_url = reverse_lazy('users_list')
     success_message = _("User was updated successfully")
     extra_context = {"title": _("Edit the user"),
@@ -42,7 +42,7 @@ class UserUpdateView(UserPermissionCustomMixin, SuccessMessageMixin, UpdateView)
 
 class UserDeleteView(UserPermissionCustomMixin, SuccessMessageMixin, DeleteView):
     model = User
-    template_name = 'users/delete.html'
+    template_name = 'delete.html'
     success_url = reverse_lazy('users_list')
     success_message = _("User was deleted successfully")
     extra_context = {"title": _("Delete the user"),
