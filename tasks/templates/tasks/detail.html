@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% load i18n %}
+
+{% block content %}
+<h1>{% translate 'Task show' %}</h1>
+<div class="card">
+  <div class="card-header bg-info text-white">
+    <h2>{{ task.name }}</h2>
+  </div>
+    <div class="card-body bg-light" >
+    {{ task.description }}
+    </div>
+     <div class="row m-1">
+        <div class="col">{% translate 'Author' %}</div>
+        <div class="col">{{ task.creator }}</div>
+      </div>
+      <div class="row m-1">
+        <div class="col">{% translate 'Executor' %}</div>
+        <div class="col">{{ task.executor }}</div>
+      </div>
+      <div class="row m-1">
+        <div class="col">{% translate 'Status' %}</div>
+        <div class="col">{{ task.status }}</div>
+      </div>
+      <div class="row m-1">
+        <div class="col">{% translate 'Created date' %}</div>
+        <div class="col">{{ task.created_at }}</div>
+      </div>
+    <div class="row m-1">
+        <div class="col">
+            <h6>{% translate "Labels:" %}</h6>
+            {% for labl in task.labels.all %}
+            <ul>
+                <li>{{ lbl }}</li>
+            </ul>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="row m-1">
+        <div class="col">
+          <a href="{% url 'task_update' pk=task.id %}">{% translate 'Update' %}</a>
+          <br>
+          <a href="{% url 'task_delete' pk=task.id %}">{% translate 'Create' %}</a>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
