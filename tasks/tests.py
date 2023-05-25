@@ -4,6 +4,9 @@ from .models import Task
 from users.models import User
 from django.core.exceptions import ObjectDoesNotExist
 from django.utils.translation import gettext_lazy as _
+import os
+import json
+from task_manager.settings import FIXTURE_DIRS
 
 
 class TaskTestCase(TestCase):
@@ -13,12 +16,8 @@ class TaskTestCase(TestCase):
         self.task1 = Task.objects.get(pk=1)
         self.task2 = Task.objects.get(pk=2)
         self.task3 = Task.objects.get(pk=3)
-        self.form_data = {"name": "Сходить к стоматологу",
-                          "description": "Вылечить зубы",
-                          "status": 1,
-                          "creator": 1,
-                          "executor": 2,
-                          "labels": 3}
+        with open(os.path.join(FIXTURE_DIRS[0], "task_form_data.json")) as file:
+            self.form_data = json.load(file)
         self.user1 = User.objects.get(pk=1)
         self.user2 = User.objects.get(pk=2)
         self.user3 = User.objects.get(pk=3)

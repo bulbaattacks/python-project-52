@@ -3,6 +3,9 @@ from django.urls import reverse
 from .models import User
 from django.core.exceptions import ObjectDoesNotExist
 from django.utils.translation import gettext_lazy as _
+import os
+import json
+from task_manager.settings import FIXTURE_DIRS
 
 
 class UserTestCase(TestCase):
@@ -13,11 +16,8 @@ class UserTestCase(TestCase):
         self.user2 = User.objects.get(pk=2)
         self.user3 = User.objects.get(pk=3)
         self.login = reverse("login")
-        self.form_data = {"username": "Neo",
-                          "last_name": "Tomas",
-                          "first_name": "Anderson",
-                          "password1": "mystupidpassword1234",
-                          "password2": "mystupidpassword1234"}
+        with open(os.path.join(FIXTURE_DIRS[0], "user_form_data.json")) as file:
+            self.form_data = json.load(file)
 
     def test_users_list(self):
         response = self.client.get(reverse("users_list"))
