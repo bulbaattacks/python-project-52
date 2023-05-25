@@ -8,8 +8,6 @@ from users.forms import UserForm
 from django.contrib import messages
 from django.utils.translation import gettext_lazy as _
 from django.utils import timezone
-from tasks.models import Task
-from django.http import HttpResponseRedirect
 from .mixins import UserPermissionCustomMixin
 from django.db.models import ProtectedError
 

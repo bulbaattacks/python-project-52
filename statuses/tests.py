@@ -52,6 +52,7 @@ class StatusTestCase(TestCase):
         with self.assertRaises(ObjectDoesNotExist):
             self.assertFalse(Status.objects.get(pk=self.status3.pk))
         self.assertContains(response, text=_("Status was deleted successfully"))
+
     def test_delete_status_attached_to_task(self):
         self.client.force_login(self.user3)
         response = self.client.get(reverse("status_delete", args=[self.status1.pk]))
@@ -59,4 +60,5 @@ class StatusTestCase(TestCase):
         response = self.client.post(reverse("status_delete", args=[self.status1.pk]), follow=True)
         self.assertRedirects(response, reverse("statuses_list"))
         self.assertTrue(Status.objects.get(id=1))
-        self.assertContains(response, text=_("Can't delete the status because it's used for the task"))
+        self.assertContains(response,
+                            text=_("Can't delete the status because it's used for the task"))
