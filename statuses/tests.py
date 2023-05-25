@@ -7,7 +7,7 @@ from django.utils.translation import gettext_lazy as _
 
 
 class StatusTestCase(TestCase):
-    fixtures = ["statuses.json", "users.json"]
+    fixtures = ["statuses.json", "users.json", "labels.json", "tasks.json"]
 
     def setUp(self):
         self.status1 = Status.objects.get(pk=1)
@@ -52,3 +52,11 @@ class StatusTestCase(TestCase):
         with self.assertRaises(ObjectDoesNotExist):
             self.assertFalse(Status.objects.get(pk=self.status3.pk))
         self.assertContains(response, text=_("Status was deleted successfully"))
+    def test_delete_status_attached_to_task(self):
+        self.client.force_login(self.user3)
+        response = self.client.get(reverse("status_delete", args=[self.status1.pk]))
+        self.assertEqual(response.status_code, 200)
+        response = self.client.post(reverse("status_delete", args=[self.status1.pk]), follow=True)
+        self.assertRedirects(response, reverse("statuses_list"))
+        self.assertTrue(Status.objects.get(id=1))
+        self.assertContains(response, text=_("Can't delete the status because it's used for the task"))

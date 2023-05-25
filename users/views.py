@@ -1,3 +1,4 @@
+from django.shortcuts import redirect
 from django.views.generic import ListView
 from django.urls import reverse_lazy
 from django.contrib.messages.views import SuccessMessageMixin
@@ -10,6 +11,7 @@ from django.utils import timezone
 from tasks.models import Task
 from django.http import HttpResponseRedirect
 from .mixins import UserPermissionCustomMixin
+from django.db.models import ProtectedError
 
 
 class UsersListView(ListView):
@@ -50,9 +52,10 @@ class UserDeleteView(UserPermissionCustomMixin, SuccessMessageMixin, DeleteView)
                      }
 
     def post(self, request, *args, **kwargs):
-        if Task.objects.filter(id=self.request.user.id):
+        try:
+            self.delete(request, *args, **kwargs)
+            messages.success(self.request, _("User was deleted successfully"))
+        except ProtectedError:
             messages.add_message(request, messages.ERROR,
                                  _("Can't delete the user because it's used for the task"))
-            return HttpResponseRedirect(reverse_lazy('users_list'))
-        messages.add_message(request, messages.SUCCESS, _("User was deleted successfully"))
-        return self.delete(request, *args, **kwargs)
+        return redirect(reverse_lazy('users_list'))

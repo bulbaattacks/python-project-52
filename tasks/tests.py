@@ -37,6 +37,10 @@ class TaskTestCase(TestCase):
         self.assertTrue(Task.objects.get(id=4))
         self.assertContains(response, text=_("Task was created successfully"))
 
+    def test_create_task_without_user(self):
+        response = self.client.get(reverse("task_create"))
+        self.assertEqual(response.status_code, 302)
+
     def test_update_task(self):
         self.client.force_login(self.user3)
         response = self.client.get(reverse("task_update", args=[self.task3.pk]))
@@ -47,7 +51,7 @@ class TaskTestCase(TestCase):
         self.assertTrue(User.objects.get(id=self.task3.pk))
         self.assertContains(response, text=_("Task was updated successfully"))
 
-    def test_delete_user(self):
+    def test_delete_task(self):
         self.client.force_login(self.user1)
         response = self.client.post(reverse("task_delete", args=[self.task3.pk]), follow=True)
         self.assertEqual(response.status_code, 200)

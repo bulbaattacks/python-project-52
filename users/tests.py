@@ -9,7 +9,7 @@ from task_manager.settings import FIXTURE_DIRS
 
 
 class UserTestCase(TestCase):
-    fixtures = ["users.json", "statuses.json"]
+    fixtures = ["users.json", "one_task.json", "statuses.json", "labels.json"]
 
     def setUp(self):
         self.user1 = User.objects.get(pk=1)
@@ -67,12 +67,9 @@ class UserTestCase(TestCase):
         self.assertContains(response, text=_("You have no right to edit the user."))
         self.assertTrue(User.objects.get(id=self.user2.pk))
 
-    '''def test_delete_user_with_task(self):
-        self.client.force_login(self.user3)
-        response = self.client.post(reverse("user_delete",
-        args=[self.user2.pk]), follow=True)
-        self.assertEqual(response.status_code, 200)
+    def test_delete_user_with_task(self):
+        self.client.force_login(self.user2)
+        response = self.client.post(reverse("user_delete", args=[self.user2.pk]), follow=True)
         self.assertRedirects(response, reverse("users_list"))
-        self.assertContains(response, text=_("Can't delete the user
-        because it's used for the task."))
-        self.assertTrue(User.objects.get(id=2))'''
+        self.assertContains(response, text=_("Can't delete the user because it's used for the task"))
+        self.assertTrue(User.objects.get(id=self.user2.pk))

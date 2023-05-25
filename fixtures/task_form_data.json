@@ -1,8 +1,8 @@
-  {
+{
     "name": "Сходить к стоматологу",
     "description": "Вылечить зубы",
     "status": 1,
     "creator": 1,
     "executor": 2,
     "labels": 3
-  }
+}
