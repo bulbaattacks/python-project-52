@@ -32,6 +32,19 @@ class UserTestCase(TestCase):
         self.assertTrue(User.objects.get(id=4))
         self.assertContains(response, text=_("User was created successfully"))
 
+    def test_create_user_with_existing_username(self):
+        response = self.client.get(reverse("user_create"))
+        self.assertEqual(response.status_code, 200)
+        response = self.client.post(reverse("user_create"), self.form_data, follow=True)
+        self.assertRedirects(response, self.login)
+        self.assertTrue(User.objects.get(id=4))
+        response = self.client.get(reverse("user_create"))
+        self.assertEqual(response.status_code, 200)
+        response = self.client.post(reverse("user_create"), self.form_data, follow=True)
+        with self.assertRaises(ObjectDoesNotExist):
+            self.assertFalse(User.objects.get(id=5))
+        self.assertContains(response, text=_("A user with the same name already exists."))
+
     def test_update_user_with_permission(self):
         self.client.force_login(self.user3)
         response = self.client.get(reverse("user_update", args=[self.user3.pk]))
