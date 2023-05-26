@@ -33,3 +33,9 @@ compile-messages:
 
 shell:
 	poetry run django-admin shell
+
+
+test-coverage:
+	poetry run coverage run manage.py test
+	poetry run coverage xml
+	poetry run coverage report
