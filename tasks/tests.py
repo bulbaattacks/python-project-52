@@ -41,6 +41,14 @@ class TaskTestCase(TestCase):
         response = self.client.get(reverse("task_create"))
         self.assertEqual(response.status_code, 302)
 
+    def test_create_task_with_existing_name(self):
+        self.client.force_login(self.user1)
+        self.client.post(reverse("task_create"), self.form_data, follow=True)
+        self.assertTrue(Task.objects.get(id=4))
+        self.client.post(reverse("task_create"), self.form_data, follow=True)
+        with self.assertRaises(ObjectDoesNotExist):
+            self.assertFalse(Task.objects.get(id=5))
+
     def test_update_task(self):
         self.client.force_login(self.user3)
         response = self.client.get(reverse("task_update", args=[self.task3.pk]))

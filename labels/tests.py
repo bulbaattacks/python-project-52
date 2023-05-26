@@ -37,7 +37,7 @@ class LabelTestCase(TestCase):
         self.client.force_login(self.user1)
         self.client.post(reverse("label_create"), self.form_data, follow=True)
         self.assertTrue(Label.objects.get(id=4))
-        response = self.client.post(reverse("label_create"), self.form_data, follow=True)
+        self.client.post(reverse("label_create"), self.form_data, follow=True)
         with self.assertRaises(ObjectDoesNotExist):
             self.assertFalse(Label.objects.get(id=5))
 
