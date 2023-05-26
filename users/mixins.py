@@ -17,6 +17,4 @@ class UserPermissionCustomMixin(LoginRequiredMixin, UserPassesTestMixin):
         if self.request.user.is_authenticated:
             messages.error(self.request, _("You have no right to edit the user."))
             return redirect(reverse_lazy('users_list'))
-        else:
-            messages.error(self.request, _("You are not authored! Please, log in."))
-            return redirect(reverse_lazy('login'))
+
