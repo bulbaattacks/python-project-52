@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-26 18:09+0400\n"
+"POT-Creation-Date: 2023-05-26 18:21+0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -62,11 +62,17 @@ msgstr "Удалить"
 msgid "Label was created successfully"
 msgstr "Метка успешно создана"
 
-#: labels/tests.py:44 labels/views.py:34
+#: labels/tests.py:43
+#, fuzzy
+#| msgid "A user with the same name already exists."
+msgid "Label with this Name already exists."
+msgstr "Label с таким Имя уже существует."
+
+#: labels/tests.py:53 labels/views.py:34
 msgid "Label was updated successfully"
 msgstr "Метка успешно изменена"
 
-#: labels/tests.py:54 labels/views.py:54
+#: labels/tests.py:63 labels/views.py:54
 msgid "Label was deleted successfully"
 msgstr "Метка успешно удалена"
 
@@ -253,7 +259,7 @@ msgstr "Удаление задачи"
 msgid "View the task"
 msgstr "Просмотр задачи"
 
-#: users/mixins.py:9 users/mixins.py:18 users/tests.py:63 users/tests.py:80
+#: users/mixins.py:9 users/mixins.py:18 users/tests.py:58 users/tests.py:75
 msgid "You have no right to edit the user."
 msgstr "У вас нет прав для изменения другого пользователя."
 
@@ -273,19 +279,19 @@ msgstr "Полное имя"
 msgid "User was created successfully"
 msgstr "Пользователь успешно зарегистрирован"
 
-#: users/tests.py:46
+#: users/tests.py:41
 msgid "A user with the same name already exists."
 msgstr "Пользователь с таким именем уже существует."
 
-#: users/tests.py:56 users/views.py:37
+#: users/tests.py:51 users/views.py:37
 msgid "User was updated successfully"
 msgstr "Пользователь успешно изменен"
 
-#: users/tests.py:71 users/views.py:47 users/views.py:55
+#: users/tests.py:66 users/views.py:47 users/views.py:55
 msgid "User was deleted successfully"
 msgstr "Пользователь успешно удален"
 
-#: users/tests.py:88 users/views.py:58
+#: users/tests.py:83 users/views.py:58
 msgid "Can't delete the user because it's used for the task"
 msgstr "Невозможно удалить пользователя, потому что он используется"
 

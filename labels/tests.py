@@ -24,7 +24,7 @@ class LabelTestCase(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, text=_("Labels"))
 
-    def test_create_status(self):
+    def test_create_label(self):
         self.client.force_login(self.user1)
         response = self.client.get(reverse("label_create"))
         self.assertEqual(response.status_code, 200)
@@ -33,7 +33,16 @@ class LabelTestCase(TestCase):
         self.assertTrue(Label.objects.get(id=4))
         self.assertContains(response, text=_("Label was created successfully"))
 
-    def test_update_status(self):
+    def test_create_label_with_existing_name(self):
+        self.client.force_login(self.user1)
+        self.client.post(reverse("label_create"), self.form_data, follow=True)
+        self.assertTrue(Label.objects.get(id=4))
+        response = self.client.post(reverse("label_create"), self.form_data, follow=True)
+        with self.assertRaises(ObjectDoesNotExist):
+            self.assertFalse(Label.objects.get(id=5))
+        self.assertContains(response, text=_("Label with this Name already exists."))
+
+    def test_update_label(self):
         self.client.force_login(self.user2)
         response = self.client.get(reverse("label_update", args=[self.label2.pk]))
         self.assertEqual(response.status_code, 200)
@@ -43,7 +52,7 @@ class LabelTestCase(TestCase):
         self.assertTrue(Label.objects.get(id=self.label2.pk))
         self.assertContains(response, text=_("Label was updated successfully"))
 
-    def test_delete_status(self):
+    def test_delete_label(self):
         self.client.force_login(self.user3)
         response = self.client.get(reverse("label_delete", args=[self.label2.pk]))
         self.assertEqual(response.status_code, 200)

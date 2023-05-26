@@ -33,13 +33,8 @@ class UserTestCase(TestCase):
         self.assertContains(response, text=_("User was created successfully"))
 
     def test_create_user_with_existing_username(self):
-        response = self.client.get(reverse("user_create"))
-        self.assertEqual(response.status_code, 200)
-        response = self.client.post(reverse("user_create"), self.form_data, follow=True)
-        self.assertRedirects(response, self.login)
+        self.client.post(reverse("user_create"), self.form_data, follow=True)
         self.assertTrue(User.objects.get(id=4))
-        response = self.client.get(reverse("user_create"))
-        self.assertEqual(response.status_code, 200)
         response = self.client.post(reverse("user_create"), self.form_data, follow=True)
         with self.assertRaises(ObjectDoesNotExist):
             self.assertFalse(User.objects.get(id=5))
