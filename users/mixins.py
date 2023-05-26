@@ -5,7 +5,7 @@ from django.urls import reverse_lazy
 from django.contrib import messages
 
 
-class UserPermissionCustomMixin(LoginRequiredMixin, UserPassesTestMixin):
+class UserPermissionCustomMixin(UserPassesTestMixin):
     permission_denied_message = _("You have no right to edit the user.")
     not_auth_message = _("You are not authored! Please, log in.")
 
