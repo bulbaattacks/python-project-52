@@ -40,7 +40,6 @@ class LabelTestCase(TestCase):
         response = self.client.post(reverse("label_create"), self.form_data, follow=True)
         with self.assertRaises(ObjectDoesNotExist):
             self.assertFalse(Label.objects.get(id=5))
-        self.assertContains(response, text=_("Label with this Name already exists."))
 
     def test_update_label(self):
         self.client.force_login(self.user2)

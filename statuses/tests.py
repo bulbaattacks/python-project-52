@@ -33,6 +33,14 @@ class StatusTestCase(TestCase):
         self.assertTrue(Status.objects.get(id=4))
         self.assertContains(response, text=_("Status was created successfully"))
 
+    def test_create_status_with_existing_name(self):
+        self.client.force_login(self.user1)
+        self.client.post(reverse("status_create"), self.form_data, follow=True)
+        self.assertTrue(Status.objects.get(id=4))
+        response = self.client.post(reverse("status_create"), self.form_data, follow=True)
+        with self.assertRaises(ObjectDoesNotExist):
+            self.assertFalse(Status.objects.get(id=5))
+
     def test_update_status(self):
         self.client.force_login(self.user2)
         response = self.client.get(reverse("status_update", args=[self.status2.pk]))

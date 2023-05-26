@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-26 18:21+0400\n"
+"POT-Creation-Date: 2023-05-26 18:26+0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -111,15 +111,21 @@ msgstr "Создать статус"
 msgid "Status was created successfully"
 msgstr "Статус успешно создан"
 
-#: statuses/tests.py:44 statuses/views.py:35
+#: statuses/tests.py:43
+#, fuzzy
+#| msgid "A user with the same name already exists."
+msgid "Task status with this name already exists."
+msgstr "Task status с таким Имя уже существует."
+
+#: statuses/tests.py:54 statuses/views.py:35
 msgid "Status was updated successfully"
 msgstr "Статус успешно изменен"
 
-#: statuses/tests.py:54 statuses/views.py:55
+#: statuses/tests.py:64 statuses/views.py:55
 msgid "Status was deleted successfully"
 msgstr "Статус успешно удален"
 
-#: statuses/tests.py:64 statuses/views.py:53
+#: statuses/tests.py:74 statuses/views.py:53
 msgid "Can't delete the status because it's used for the task"
 msgstr "Невозможно удалить статус, потому что он используется"
 
