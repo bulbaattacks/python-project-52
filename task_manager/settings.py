@@ -155,7 +155,8 @@ LOCALE_PATHS = [
 LANGUAGE_CODE = 'ru'
 
 # For deploying the Django app on the railway
-CSRF_TRUSTED_ORIGINS = ['https://python-project-52-production-409d.up.railway.app']
+CSRF_TRUSTED_ORIGINS = \
+    ['https://python-project-52-production-409d.up.railway.app']
 
 
 ROLLBAR = {
