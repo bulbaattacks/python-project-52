@@ -17,4 +17,3 @@ class UserPermissionCustomMixin(LoginRequiredMixin, UserPassesTestMixin):
         if self.request.user.is_authenticated:
             messages.error(self.request, _("You have no right to edit the user."))
             return redirect(reverse_lazy('users_list'))
-
