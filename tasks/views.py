@@ -4,7 +4,6 @@ from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.views.generic.detail import DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from tasks.models import Task
-from tasks.forms import TaskForm
 from django.utils.translation import gettext_lazy as _
 from django_filters.views import FilterView
 from .filters import TaskFilter
@@ -21,7 +20,7 @@ class TasksListView(LoginRequiredMixin, FilterView):
 
 class TaskCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     model = Task
-    form_class = TaskForm
+    fields = ['name', 'description', 'status', 'executor', 'labels']
     template_name = "edit.html"
     success_url = reverse_lazy('tasks_list')
     success_message = _("Task was created successfully")
@@ -38,7 +37,7 @@ class TaskCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
 
 class TaskUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     model = Task
-    form_class = TaskForm
+    fields = ['name', 'description', 'status', 'executor', 'labels']
     template_name = "edit.html"
     success_url = reverse_lazy('tasks_list')
     success_message = _("Task was updated successfully")

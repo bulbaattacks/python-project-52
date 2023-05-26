@@ -5,7 +5,6 @@ from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from statuses.models import Status
 from django.utils.translation import gettext_lazy as _
 from django.urls import reverse_lazy
-from statuses.forms import StatusForm
 from tasks.models import Task
 from django.contrib import messages
 from django.http import HttpResponseRedirect
@@ -18,8 +17,8 @@ class StatusesListView(LoginRequiredMixin, ListView):
 
 
 class StatusCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
-    form_class = StatusForm
     model = Status
+    fields = ['name']
     template_name = "edit.html"
     success_url = reverse_lazy('statuses_list')
     success_message = _("Status was created successfully")
@@ -30,7 +29,7 @@ class StatusCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
 
 class StatusUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     model = Status
-    form_class = StatusForm
+    fields = ['name']
     template_name = 'edit.html'
     success_url = reverse_lazy('statuses_list')
     success_message = _("Status was updated successfully")
