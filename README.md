@@ -5,7 +5,6 @@
 
 ### About
 Task Manager system allows you to create tasks, assign executors and update their statuses.
-You can take a look at deployed app [here](https://python-project-52-production-409d.up.railway.app)
 
 ### How to run
 
